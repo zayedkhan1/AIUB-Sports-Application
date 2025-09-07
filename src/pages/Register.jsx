@@ -44,6 +44,7 @@ const Register = () => {
     .then(result=>{
       const user=result.user;
       console.log(user);
+      alert('Account Created Successfully');
       navigate('/login');
     })
     .catch(error=>{

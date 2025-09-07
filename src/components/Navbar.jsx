@@ -12,7 +12,9 @@ const Navbar = () => {
 
   const handleLogOut=()=>{
     userSingOut()
-    .then(()=>{})
+    .then(()=>{
+      alert('LogOut Successful');
+    })
     .catch(error=>{
       console.log(error);
     })
@@ -99,25 +101,38 @@ const Navbar = () => {
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-indigo-700">
           <a
             href="#home"
-            className="text-white hover:bg-indigo-600 block px-3 py-2 rounded-md text-base font-medium flex items-center"
+            className="text-white hover:bg-indigo-600  px-3 py-2 rounded-md text-base font-medium flex items-center"
           >
             <FaHome className="mr-2" />
             Home
           </a>
-          <a
+          {
+            user?  <button
+            onClick={handleLogOut}
+            className="text-white hover:bg-indigo-600  px-3 py-2 rounded-md text-base font-medium flex items-center"
+          >
+            <FaUser className="mr-2" />
+            Logout
+          </button>
+          :
+         <>
+             <a
             href="#login"
-            className="text-white hover:bg-indigo-600 block px-3 py-2 rounded-md text-base font-medium flex items-center"
+            className="text-white hover:bg-indigo-600  px-3 py-2 rounded-md text-base font-medium flex items-center"
           >
             <FaUser className="mr-2" />
             Login
           </a>
           <a
             href="#register"
-            className="text-white bg-indigo-800 hover:bg-indigo-600 block px-3 py-2 rounded-md text-base font-medium flex items-center"
+            className="text-white bg-indigo-800 hover:bg-indigo-600  px-3 py-2 rounded-md text-base font-medium flex items-center"
           >
             <FaUserPlus className="mr-2" />
             Register
           </a>
+         </>
+          }
+      
         </div>
       </div>
     </nav>

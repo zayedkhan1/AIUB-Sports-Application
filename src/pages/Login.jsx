@@ -24,6 +24,7 @@ const Login = () => {
     .then(result=>{
       const user=result.user;
       console .log(user);
+      alert('Login Successful');
       navigate('/');
     } ).catch(error=>{
       console.log(error.message);
