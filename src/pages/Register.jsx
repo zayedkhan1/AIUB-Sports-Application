@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaFutbol, FaUser, FaUserPlus, FaCrown, FaLeaf, FaIdCard, FaVenusMars,FaCodepen, FaCode } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthProvider';
 
 const Register = () => {
+  const { createAccount } = useContext(AuthContext)
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate=useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -36,7 +39,16 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle registration logic here
-    console.log('Registering with:', formData);
+    console.log('Registering with:', formData.email, formData.password);
+    createAccount(formData.email, formData.password)
+    .then(result=>{
+      const user=result.user;
+      console.log(user);
+      navigate('/login');
+    })
+    .catch(error=>{
+      console.log(error.message);
+    })
   };
 
   return (
@@ -267,9 +279,9 @@ const Register = () => {
               <div className="mt-8 text-center">
                 <Link to='/login' className="text-slate-500 text-sm">
                   Already have an account?{' '}
-                  <a href="#" className="text-blue-500 font-medium hover:text-blue-600">
+                  <p href="#" className="text-blue-500 font-medium hover:text-blue-600">
                     Sign in
-                  </a>
+                  </p>
                 </Link>
               </div>
 

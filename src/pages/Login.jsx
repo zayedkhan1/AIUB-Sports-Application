@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaFutbol, FaUserPlus, FaLeaf, FaCrown } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useNavigation } from 'react-router-dom';
+import { AuthContext } from '../context/AuthProvider';
 
 const Login = () => {
+  const { userLogin } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const navigate=useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -17,6 +20,14 @@ const Login = () => {
     e.preventDefault();
     // Handle login logic here
     console.log('Logging in with:', { email, password, rememberMe });
+    userLogin(email, password)
+    .then(result=>{
+      const user=result.user;
+      console .log(user);
+      navigate('/');
+    } ).catch(error=>{
+      console.log(error.message);
+    })  
   };
 
   return (
