@@ -44,6 +44,13 @@ const Navbar = () => {
                 <FaHome className="mr-1" />
                 Home
               </a>
+              <a
+                href="/about"
+                className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
+              >
+                <FaHome className="mr-1" />
+                About Us
+              </a>
               {
                 user?
                 <button
