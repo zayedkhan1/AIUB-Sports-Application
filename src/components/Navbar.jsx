@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaHome, FaUser, FaUserPlus, FaBars, FaTimes } from 'react-icons/fa';
 import navLogo from '../assets/images/aiubsportslogo.jpg'
+import { AuthContext } from '../context/AuthProvider';
 const Navbar = () => {
+  const {userSingOut,user}=useContext(AuthContext)
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleLogOut=()=>{
+    userSingOut()
+    .then(()=>{})
+    .catch(error=>{
+      console.log(error);
+    })
+  }
 
   return (
     <nav className="bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg">
@@ -32,7 +42,19 @@ const Navbar = () => {
                 <FaHome className="mr-1" />
                 Home
               </a>
-              <a
+              {
+                user?
+                <button
+                onClick={handleLogOut}
+              
+                className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
+              >
+                <FaUser className="mr-1" />
+                LogOut
+              </button>
+                :
+                <>
+                 <a
                 href="/login"
                 className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
               >
@@ -46,6 +68,11 @@ const Navbar = () => {
                 <FaUserPlus className="mr-1" />
                 Register
               </a>
+                </>
+              }
+
+
+             
             </div>
           </div>
 
