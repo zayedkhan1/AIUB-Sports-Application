@@ -6,10 +6,12 @@ export const AuthContext=createContext();
 const AuthProvider = ({children}) => {
     const [user,setUser]=useState(null);
     const [loading,setLoading]=useState(true);
+    const [sportsData,setSportsData]=useState([]);  
 
     const createAccount=(email,password)=>{
         setLoading(true);
         return createUserWithEmailAndPassword( auth,email,password);
+
       
     }
     const userLogin=(email,password)=>{
@@ -37,6 +39,8 @@ const AuthProvider = ({children}) => {
         userSingOut,
         user,
         loading,
+        sportsData,
+        setSportsData,
 
     }
     return (

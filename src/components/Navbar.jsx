@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FaHome, FaUser, FaUserPlus, FaBars, FaTimes } from 'react-icons/fa';
+import { MdOutlineSignpost } from "react-icons/md";
 import navLogo from '../assets/images/aiubsportslogo.jpg'
 import { AuthContext } from '../context/AuthProvider';
 const Navbar = () => {
@@ -25,14 +26,14 @@ const Navbar = () => {
       <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Left side: Logo and name */}
-          <div className="flex-shrink-0 flex items-center">
+          <a href='/' className="flex-shrink-0 flex items-center">
             <div className="flex items-center">
               <div className="h-12 w-12 bg-white rounded-full flex items-center justify-center mr-2">
                <img className='rounded-full' src={navLogo} alt="AIUB Sports Logo" />
               </div>
               <span className="text-white font-bold text-xl">AIUB SPORTS</span>
             </div>
-          </div>
+          </a>
 
           {/* Right side: Navigation items (desktop) */}
           <div className="hidden md:block">
@@ -43,6 +44,20 @@ const Navbar = () => {
               >
                 <FaHome className="mr-1" />
                 Home
+              </a>
+              <a
+                href="/postposition"
+                className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
+              >
+                <MdOutlineSignpost className="mr-1" />
+                Post Position
+              </a>
+              <a
+                href="/myapplications"
+                className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
+              >
+                <MdOutlineSignpost className="mr-1" />
+                My Applications
               </a>
               <a
                 href="/about"
