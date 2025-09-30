@@ -255,38 +255,41 @@ const PostPosition = () => {
                   )}
                 </motion.div>
 
-                {/* Skill Level */}
+                {/* Depertment */}
                 <motion.div variants={itemVariants} className="relative group">
                   <label className="block text-sm font-semibold text-gray-700 mb-2 ml-1">
-                    Skill Level *
+                    Depertment*
                   </label>
                   <div className="relative">
                     <FaGraduationCap className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-500 text-lg z-10" />
                     <select
-                      {...register("level", { required: "Please select a skill level" })}
+                      {...register("depertment", { required: "Please select a depertment" })}
                       className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 appearance-none ${
-                        errors.level 
+                        errors.depertment
                           ? "border-red-400 focus:border-red-500" 
                           : "border-gray-200 focus:border-yellow-500 group-hover:border-yellow-300"
                       } focus:ring-4 focus:ring-yellow-200 focus:outline-none`}
                     >
-                      <option value="">Select Experience Level</option>
-                      <option value="Beginner">Beginner 🟢</option>
-                      <option value="Intermediate">Intermediate 🟡</option>
-                      <option value="Advanced">Advanced 🔴</option>
-                      <option value="Professional">Professional ⭐</option>
+                      <option value="">Select Depertment</option>
+                      <option value="CSE">CSE 🟢</option>
+                      <option value="EEE">EEE 🟡</option>
+                      <option value="LLB">LLB 🔴</option>
+                      <option value="English">English🔴</option>
+                      <option value="Social Science">Social science 🟢</option>
+                      <option value="Social Science">All</option>
+                      
                     </select>
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
                       ▼
                     </div>
                   </div>
-                  {errors.level && (
+                  {errors.depertment && (
                     <motion.p 
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
                     >
-                      {errors.level.message}
+                      {errors.depertment.message}
                     </motion.p>
                   )}
                 </motion.div>
@@ -342,6 +345,40 @@ const PostPosition = () => {
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
                     >
                       {errors.time.message}
+                    </motion.p>
+                  )}
+                </motion.div>
+                 <motion.div variants={itemVariants} className="relative group">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2 ml-1">
+                    Skill Level *
+                  </label>
+                  <div className="relative">
+                    <FaGraduationCap className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-500 text-lg z-10" />
+                    <select
+                      {...register("level", { required: "Please select a skill level" })}
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 appearance-none ${
+                        errors.level 
+                          ? "border-red-400 focus:border-red-500" 
+                          : "border-gray-200 focus:border-yellow-500 group-hover:border-yellow-300"
+                      } focus:ring-4 focus:ring-yellow-200 focus:outline-none`}
+                    >
+                      <option value="">Select Experience Level</option>
+                      <option value="Beginner">Beginner 🟢</option>
+                      <option value="Intermediate">Intermediate 🟡</option>
+                      <option value="Advanced">Advanced 🔴</option>
+                      <option value="Professional">Professional ⭐</option>
+                    </select>
+                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
+                      ▼
+                    </div>
+                  </div>
+                  {errors.level && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-500 mt-2 text-sm flex items-center gap-1"
+                    >
+                      {errors.level.message}
                     </motion.p>
                   )}
                 </motion.div>

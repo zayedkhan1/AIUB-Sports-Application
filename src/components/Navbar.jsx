@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { FaHome, FaUser, FaUserPlus, FaBars, FaTimes } from 'react-icons/fa';
 import { MdOutlineSignpost } from "react-icons/md";
 import navLogo from '../assets/images/aiubsportslogo.jpg'
+import { IoIosApps } from "react-icons/io";
 import { AuthContext } from '../context/AuthProvider';
 const Navbar = () => {
   const {userSingOut,user}=useContext(AuthContext)
@@ -52,13 +53,19 @@ const Navbar = () => {
                 <MdOutlineSignpost className="mr-1" />
                 Post Position
               </a>
-              <a
+           {
+            user && <>
+            <a
                 href="/myapplications"
                 className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
               >
-                <MdOutlineSignpost className="mr-1" />
+                <IoIosApps className="mr-1" />
                 My Applications
               </a>
+
+            
+            </>
+           }
               <a
                 href="/about"
                 className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"

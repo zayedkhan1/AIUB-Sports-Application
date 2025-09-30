@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     loader: ({ params }) => fetch(`http://localhost:5000/sports/${params.id}`)
   },
   {
-    path:'/apply',
+    path:'/applysports/:id',
     element:<PrivateRoute><ApplySports></ApplySports></PrivateRoute>
     },
     {

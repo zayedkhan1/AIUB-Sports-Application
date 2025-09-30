@@ -17,6 +17,7 @@ import { set } from 'react-hook-form';
 
 const SportsDetails = () => {
     const data = useLoaderData();
+    console.log(data)
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -118,7 +119,7 @@ const SportsDetails = () => {
 
                             {/* Action Buttons */}
                             <div className="flex gap-3 mt-6">
-                                <Link to="/apply">
+                                <Link to={`/applysports/${data._id}`} >
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
@@ -226,8 +227,19 @@ const SportsDetails = () => {
                                 </p>
                             </motion.div>
 
-                            {/* Experience Level */}
+                           <div className='flex items-center justify-between'>
+                             {/* Experience Level */}
                             <motion.div variants={itemVariants}>
+                                <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                                    Depertment
+                                </h3>
+                                <div className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full font-semibold">
+                                    {data.depertment}
+                                </div>
+                            </motion.div>
+
+                                <motion.div variants={itemVariants}>
                                 <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
                                     <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
                                     Experience Level
@@ -236,7 +248,11 @@ const SportsDetails = () => {
                                     {data.level}
                                 </div>
                             </motion.div>
+                           </div>
                         </motion.div>
+
+
+                        
                     </div>
                 </motion.div>
 

@@ -13,9 +13,11 @@ import {
   FaIdCard
 } from "react-icons/fa";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ApplySports = () => {
+  const params=useParams();
+  console.log(params.id)
     const navigate=useNavigate();
   const { 
     register, 
@@ -52,15 +54,16 @@ const ApplySports = () => {
     const applicationData = {
         name: data.name,
         email: data.email,
-        team: data.teamId,
-        sportId: sportId,   // <-- pass the sport ID here
+        sportId:params.id
+
 
     
     }
       axios.post('http://localhost:5000/applications', applicationData)
       .then(response => {
         console.log('Application submitted successfully:', response.data);
-        navigate('/myapplications');
+         navigate('/myapplications');
+
     })
       .catch(error => {
         console.error('Error submitting application:', error);
@@ -126,7 +129,7 @@ const ApplySports = () => {
               <div>
                 <h3 className="font-bold text-lg">Application Submitted!</h3>
                 <p className="text-green-100 text-sm mt-1">
-                  Thank you for applying. We'll review your application shortly.
+                 Thank you for applying. We'll review your application shortly.
                 </p>
               </div>
             </div>

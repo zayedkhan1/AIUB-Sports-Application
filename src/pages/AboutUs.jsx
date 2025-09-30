@@ -5,6 +5,7 @@ import {
   FaArrowRight, FaQuoteLeft, FaGlobe, 
   FaLightbulb, FaHandshake, FaStar
 } from 'react-icons/fa';
+import indoorgames from '../assets/images/aiubIndoorgames.png'
 
 const AboutUs = () => {
   const teamMembers = [
@@ -66,8 +67,12 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-blue-50 text-slate-800">
       {/* Header Section */}
-      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+      {/* <section className="pt-32 pb-20 px-4 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-r from-blue-500/5 to-purple-500/5"></div>
+        <div>
+          <img src={indoorgames} alt="" />
+
+        </div>
         <div className="container mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -90,7 +95,187 @@ const AboutUs = () => {
             </motion.button>
           </motion.div>
         </div>
-      </section>
+      </section> */}
+{/* Header Section */}
+<section className=" flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 px-4 pt-20 pb-32">
+  {/* Animated Background Elements */}
+  <div className="absolute inset-0">
+    {/* Gradient Orbs */}
+    <div className="absolute top-1/4 -left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+    <div className="absolute bottom-1/4 -right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+    
+    {/* Grid Pattern */}
+    <div className="absolute inset-0 opacity-10">
+      <div className="pattern-grid-lg pattern-blue-500 pattern-opacity-30 w-full h-full"></div>
+    </div>
+    
+    {/* Floating Particles */}
+    {[...Array(20)].map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-60"
+        initial={{ 
+          y: Math.random() * 100,
+          x: Math.random() * 100 
+        }}
+        animate={{ 
+          y: [null, Math.random() * 100 - 50],
+          x: [null, Math.random() * 100 - 50]
+        }}
+        transition={{ 
+          duration: 3 + Math.random() * 2,
+          repeat: Infinity,
+          repeatType: "reverse",
+          delay: i * 0.3
+        }}
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+        }}
+      />
+    ))}
+  </div>
+
+  <div className="container mx-auto relative z-10">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Image/Visual Content - Now on Left */}
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="relative order-1 lg:order-1"
+      >
+        <div className="relative rounded-3xl overflow-hidden ">
+          <img 
+            src={indoorgames} 
+            alt="SportConnect Community" 
+            className="w-150 h-150 rounded-3xl  transform hover:scale-105 transition-transform duration-700"
+          />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
+          
+          {/* Floating Elements */}
+          <motion.div
+            animate={{ 
+              y: [0, -20, 0],
+              rotate: [0, 5, 0]
+            }}
+            transition={{ 
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute top-6 left-6 bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20"
+          >
+            <div className="text-white text-center">
+              <div className="text-2xl font-bold">🏆</div>
+              <div className="text-sm font-semibold">Champions</div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            animate={{ 
+              y: [0, 15, 0],
+              rotate: [0, -3, 0]
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+            className="absolute bottom-6 right-6 bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20"
+          >
+            <div className="text-white text-center">
+              <div className="text-2xl font-bold">⚡</div>
+              <div className="text-sm font-semibold">Active</div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Background Decorative Elements */}
+        <div className="absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl blur-3xl"></div>
+      </motion.div>
+
+      {/* Text Content - Now on Right */}
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-center lg:text-left order-2 lg:order-2"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 mb-6"
+        >
+          <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+          <span className="text-white/80 text-sm font-medium">Revolutionizing Sports Connections</span>
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+        >
+          About{" "}
+          <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            SportConnect
+          </span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="text-xl text-gray-300 mb-10 leading-relaxed max-w-2xl"
+        >
+          We're on a mission to revolutionize how athletes connect, teams form, and sports communities thrive through cutting-edge technology and passionate community building.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+        >
+          <motion.button
+            whileHover={{ 
+              scale: 1.05,
+              boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-2xl px-8 py-4 shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-3 group"
+          >
+            Join Our Community
+            <motion.span
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="group-hover:translate-x-1 transition-transform duration-200"
+            >
+              →
+            </motion.span>
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-white/10 backdrop-blur-sm text-white font-semibold rounded-2xl px-8 py-4 border border-white/20 hover:bg-white/20 transition-all duration-300"
+          >
+            Learn More
+          </motion.button>
+        </motion.div>
+
+  
+      </motion.div>
+    </div>
+  </div>
+
+
+</section>
 
       {/* Mission Section */}
       <section className="py-16 px-4 bg-white">

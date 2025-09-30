@@ -102,23 +102,7 @@ function formatTime(timeString) {
   }
 }
 
-  // const featuredPositions = [
-  //   {
-  //     id: 1,
-  //     title: 'Striker Needed',
-  //     sport: 'football',
-  //     team: 'City FC',
-  //     location: 'New York',
-  //     level: 'Intermediate',
-  //     posted: '2 hours ago'
-  //   },
-   
-  // ];
 
-  // Filtering logic
-  // const filteredPositions = activeSport === 'all'
-  //   ? featuredPositions
-  //   : featuredPositions.filter(pos => pos.sport === activeSport);
   
 // Filtering based on active sport
 const displayedPositions = activeSport === 'all'
@@ -134,6 +118,7 @@ const displayedPositions = activeSport === 'all'
         {/* Hero Section */}
         <section className="pt-32 pb-20 px-4">
           <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -152,7 +137,7 @@ const displayedPositions = activeSport === 'all'
                   className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-xl px-8 py-4 shadow-md hover:shadow-lg transition-all"
                 >
                   Find a Team
-                </motion.button>
+                </motion.button> 
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -216,6 +201,7 @@ const displayedPositions = activeSport === 'all'
 
         {/* Sports Categories */}
         <section className="py-16 px-4 bg-white">
+          
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -296,9 +282,9 @@ const displayedPositions = activeSport === 'all'
                       <span>{position.location}</span>
                     </div>
 
-                    <div className="flex justify-between items-center mb-6">
-                      <span className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm ">
-                        {position.level}
+                    <div className=" flex justify-between items-center mb-6">
+                      <span className=" bg-gradient-to-r from-indigo-500 to-purple-500 text-gray-100 px-3 py-1 rounded-full text-sm ">
+                        {position.depertment}
                       </span>
                       {/* <span className="text-slate-400 text-sm">  {formatTime(position.time)}</span> */}
                       <div className="flex items-center text-slate-400 text-sm">
