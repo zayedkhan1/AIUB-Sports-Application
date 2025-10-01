@@ -1,7 +1,8 @@
 import PreFooter from '../components/PreFooter';
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import sportspic from '../assets/images/aiubsportspic.png'
+
 import {
   FaFutbol, FaSearch,
   FaUserFriends, FaTrophy, FaBell, FaUserCircle,
@@ -12,45 +13,66 @@ import {
   FaChess,
   FaFootballBall,
   FaClock,
-  FaUser
+  FaUser,
+  FaUsers
+
 } from 'react-icons/fa';
+
 import { IoIosTennisball } from "react-icons/io";
 import { FaBaseball, FaBasketball, FaVolleyball } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { set } from 'react-hook-form';
 
+import {
+
+  FaQuoteLeft, FaGlobe,
+  FaLightbulb, FaHandshake,
+} from 'react-icons/fa';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectCoverflow } from 'swiper/modules';
+// import {FaSearch } from 'react-icons/fa';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+//player details
+import zayed from '../assets/players/zayed.jpg'
+
 const Home = () => {
   const [activeSport, setActiveSport] = useState('all'); // default: show all
   const [scrolled, setScrolled] = useState(false);
   const [positions, setPositions] = useState([]);
-const [filteredPositions, setFilteredPositions] = useState([]);
+  const [filteredPositions, setFilteredPositions] = useState([]);
+  // new things
+  const [players, setPlayers] = useState([]);
+  const [filteredPlayers, setFilteredPlayers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
-useEffect(() => {
-  const fetchPositions = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/sports"); // replace with your backend URL
-      const data = await res.json();
+  useEffect(() => {
+    const fetchPositions = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/sports"); // replace with your backend URL
+        const data = await res.json();
 
-      // Sort by newest first (optional)
-      const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        // Sort by newest first (optional)
+        const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      // Keep all positions in state
-     
-      setPositions(sortedData);
+        // Keep all positions in state
+
+        setPositions(sortedData);
 
 
-      // Show first 9 as featured
-      setFilteredPositions(sortedData.slice(0, 9));
-       
-    } catch (err) {
-      console.error("Failed to fetch positions:", err);
-    }
- 
-  };
+        // Show first 9 as featured
+        setFilteredPositions(sortedData.slice(0, 9));
 
-  fetchPositions();
-  
-}, []);
+      } catch (err) {
+        console.error("Failed to fetch positions:", err);
+      }
+
+    };
+
+    fetchPositions();
+
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,37 +99,96 @@ useEffect(() => {
     { id: 'handball', name: 'Handball', icon: <FaFootballBall /> },
     { id: 'Tennis', name: 'Tennis', icon: < IoIosTennisball /> }
   ];
-function formatTime(timeString) {
-  // Combine with today's date
-  const today = new Date();
-  const [hours, minutes] = timeString.split(':').map(Number);
-  const date = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hours, minutes);
 
-  const now = new Date();
-  const diff = Math.floor((now - date) / 1000);
-  const diffDays = Math.floor(diff / 86400);
+  // Mock data - 20 players with team names
+  const playerData = [
+    { id: 1, name: 'zayed khan', team: ' CS Mokingbard', image: zayed },
+    { id: 2, name: 'Marcus Chen', team: 'Dragon Warriors', image: '/api/placeholder/150/150' },
+    { id: 3, name: 'Sarah Williams', team: 'Phoenix United', image: '/api/placeholder/150/150' },
+    { id: 4, name: 'James Rodriguez', team: 'Eagle FC', image: '/api/placeholder/150/150' },
+    { id: 5, name: 'Lisa Thompson', team: 'Tiger FC', image: '/api/placeholder/150/150' },
+    { id: 6, name: 'Mike Peterson', team: 'Lion Hearts', image: '/api/placeholder/150/150' },
+    { id: 7, name: 'Emma Davis', team: 'Shark FC', image: '/api/placeholder/150/150' },
+    { id: 8, name: 'David Wilson', team: 'Bear United', image: '/api/placeholder/150/150' },
+    { id: 9, name: 'Sophia Martinez', team: 'Wolf Pack', image: '/api/placeholder/150/150' },
+    { id: 10, name: 'Ryan Kim', team: 'Hawk FC', image: '/api/placeholder/150/150' },
+    { id: 11, name: 'Olivia Brown', team: 'Panther FC', image: '/api/placeholder/150/150' },
+    { id: 12, name: 'Kevin Taylor', team: 'Falcon United', image: '/api/placeholder/150/150' },
+    { id: 13, name: 'Natalie Lee', team: 'Cobra FC', image: '/api/placeholder/150/150' },
+    { id: 14, name: 'Chris Evans', team: 'Rhino FC', image: '/api/placeholder/150/150' },
+    { id: 15, name: 'Amanda Scott', team: 'Jaguar United', image: '/api/placeholder/150/150' },
+    { id: 16, name: 'Daniel White', team: 'Scorpion FC', image: '/api/placeholder/150/150' },
+    { id: 17, name: 'Jessica Hall', team: 'Viper United', image: '/api/placeholder/150/150' },
+    { id: 18, name: 'Brian Clark', team: 'Puma FC', image: '/api/placeholder/150/150' },
+    { id: 19, name: 'Michelle Adams', team: 'Leopard United', image: '/api/placeholder/150/150' },
+    { id: 20, name: 'Jason Miller', team: 'Cheetah FC', image: '/api/placeholder/150/150' }
+  ];
+  useEffect(() => {
+    // Shuffle players randomly
+    const shuffledPlayers = [...playerData].sort(() => Math.random() - 0.5);
+    setPlayers(shuffledPlayers);
+    setFilteredPlayers(shuffledPlayers);
+  }, []);
 
-  if (diffDays === 0) {
-    // Today → show 12-hour format
-    let h = date.getHours();
-    const m = date.getMinutes().toString().padStart(2, '0');
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    h = h % 12;
-    h = h ? h : 12;
-    return `${h}:${m} ${ampm}`;
-  } else if (diffDays === 1) {
-    return '1 day ago';
-  } else {
-    return `${diffDays} days ago`;
+  useEffect(() => {
+    const filtered = players.filter(player =>
+      player.team.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      player.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredPlayers(filtered);
+  }, [searchTerm, players]);
+
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
+
+  function formatTime(timeString) {
+    // Combine with today's date
+    const today = new Date();
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const date = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hours, minutes);
+
+    const now = new Date();
+    const diff = Math.floor((now - date) / 1000);
+    const diffDays = Math.floor(diff / 86400);
+
+    if (diffDays === 0) {
+      // Today → show 12-hour format
+      let h = date.getHours();
+      const m = date.getMinutes().toString().padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12;
+      h = h ? h : 12;
+      return `${h}:${m} ${ampm}`;
+    } else if (diffDays === 1) {
+      return '1 day ago';
+    } else {
+      return `${diffDays} days ago`;
+    }
   }
-}
 
-
-  
-// Filtering based on active sport
-const displayedPositions = activeSport === 'all'
-  ? filteredPositions
-  : positions.filter(pos => pos.sport === activeSport);
+  // Filtering based on active sport
+  const displayedPositions = activeSport === 'all'
+    ? filteredPositions
+    : positions.filter(pos => pos.sport === activeSport);
 
 
 
@@ -118,7 +199,7 @@ const displayedPositions = activeSport === 'all'
         {/* Hero Section */}
         <section className="pt-32 pb-20 px-4">
           <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -137,7 +218,7 @@ const displayedPositions = activeSport === 'all'
                   className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-xl px-8 py-4 shadow-md hover:shadow-lg transition-all"
                 >
                   Find a Team
-                </motion.button> 
+                </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -201,7 +282,6 @@ const displayedPositions = activeSport === 'all'
 
         {/* Sports Categories */}
         <section className="py-16 px-4 bg-white">
-          
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -219,8 +299,8 @@ const displayedPositions = activeSport === 'all'
                   key={sport.id}
                   whileHover={{ y: -5, scale: 1.05 }}
                   className={`p-6 rounded-xl cursor-pointer transition-all ${activeSport === sport.id
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
-                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                     }`}
                   onClick={() => setActiveSport(sport.id)}
                 >
@@ -231,7 +311,6 @@ const displayedPositions = activeSport === 'all'
             </div>
           </div>
         </section>
-
         {/* Featured Positions */}
         <section className="py-16 px-4">
           <div className="container mx-auto">
@@ -267,9 +346,9 @@ const displayedPositions = activeSport === 'all'
                       <div>
                         {/* <h3 className="font-bold text-lg text-slate-800">{position.title}</h3> */}
                         <div className="flex items-center mb-2">
-                                 <FaUser className="mr-2 text-gray-400" />
-                                <h3 className="font-bold text-lg text-slate-800">{position.title}</h3>
-                                  </div>
+                          <FaUser className="mr-2 text-gray-400" />
+                          <h3 className="font-bold text-lg text-slate-800">{position.title}</h3>
+                        </div>
                         <p className="text-slate-500">{position.team}</p>
                       </div>
                       <div className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
@@ -288,93 +367,241 @@ const displayedPositions = activeSport === 'all'
                       </span>
                       {/* <span className="text-slate-400 text-sm">  {formatTime(position.time)}</span> */}
                       <div className="flex items-center text-slate-400 text-sm">
-                      <FaClock className="mr-2 text-indigo-500" />
-                      <span>{formatTime(position.time)}</span>
-                        </div>
+                        <FaClock className="mr-2 text-indigo-500" />
+                        <span>{formatTime(position.time)}</span>
+                      </div>
                     </div>
 
-                      <Link  to={`/apply/${position._id}`}>
-                       <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all">
-                      Apply Now
-                    </button>
-                      </Link>
-                   
+                    <Link to={`/apply/${position._id}`}>
+                      <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all">
+                        Apply Now
+                      </button>
+                    </Link>
+
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
-        
-        {/* Featured Positions */}
-
-        {/* How It Works */}
-        <section className="py-16 px-4 bg-white">
-          <div className="container mx-auto">
+        {/* Player who find team */}
+        <section className=" bg-gradient-to-b from-purple-400 via-blue-400 to-purple-400  py-16 px-4">
+          <div className="max-w-7xl mx-auto">
+            {/* Header Section */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <h2 className="text-3xl font-bold text-slate-800 mb-4">How It Works</h2>
-              <p className="text-slate-600 max-w-2xl mx-auto">Getting started with SportConnect is simple. Follow these steps to find your perfect match.</p>
-            </motion.div>
+              <div className="inline-flex items-center gap-3 mb-4">
+                <div className="p-3 bg-blue-500 rounded-full">
+                  <FaUsers className="text-white text-2xl" />
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  Players Who Found Teams
+                </h2>
+              </div>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+                Discover inspiring stories of athletes who found their perfect teams through our platform
+              </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { icon: <FaUserFriends />, title: 'Create Profile', desc: 'Build your sports profile with skills, experience, and preferences.' },
-                { icon: <FaSearch />, title: 'Find Opportunities', desc: 'Browse teams and positions that match your criteria.' },
-                { icon: <FaPlay />, title: 'Start Playing', desc: 'Connect with teams and start playing your favorite sports.' }
-              ].map((step, index) => (
+              {/* Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="text-center p-6 rounded-2xl bg-slate-50 border border-slate-100"
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
                 >
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
-                    {step.icon}
+                  <div className="flex items-center justify-center gap-3">
+                    <FaTrophy className="text-yellow-400 text-2xl" />
+                    <div>
+                      <div className="text-3xl font-bold text-white">500+</div>
+                      <div className="text-gray-300">Successful Matches</div>
+                    </div>
                   </div>
-                  <h3 className="font-bold text-xl text-slate-800 mb-3">{step.title}</h3>
-                  <p className="text-slate-600">{step.desc}</p>
                 </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* CTA Section */}
-        <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-          <div className="container mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Find Your Team?</h2>
-              <p className="text-blue-100 max-w-2xl mx-auto mb-10">Join thousands of players who have found their perfect sports match through our platform.</p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.button
+                <motion.div
                   whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-white text-blue-600 font-medium rounded-xl px-8 py-4 shadow-md hover:shadow-lg transition-all"
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
                 >
-                  Sign Up Now
-                </motion.button>
-                <motion.button
+                  <div className="flex items-center justify-center gap-3">
+                    <FaUsers className="text-green-400 text-2xl" />
+                    <div>
+                      <div className="text-3xl font-bold text-white">150+</div>
+                      <div className="text-gray-300">Active Teams</div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
                   whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-transparent border-2 border-white text-white font-medium rounded-xl px-8 py-4 hover:bg-white hover:text-blue-600 transition-all"
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
                 >
-                  Learn More
-                </motion.button>
+                  <div className="flex items-center justify-center gap-3">
+                    <FaStar className="text-blue-400 text-2xl" />
+                    <div>
+                      <div className="text-3xl font-bold text-white">4.9/5</div>
+                      <div className="text-gray-300">Success Rating</div>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
+
+            {/* Search Bar */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+              className="max-w-md mx-auto mb-12"
+            >
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search players or teams..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pl-14"
+                />
+                <FaSearch className="absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-300 text-xl" />
+              </div>
+            </motion.div>
+
+            {/* Swiper Carousel */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="mb-16"
+            >
+              <Swiper
+                effect={'coverflow'}
+                grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={'auto'}
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
+                }}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                modules={[EffectCoverflow, Autoplay]}
+                className="mySwiper"
+              >
+                {filteredPlayers.map((player) => (
+                  <SwiperSlide key={player.id} className="max-w-xs">
+                    <motion.div
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.05 }}
+                      className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-2xl"
+                    >
+                      <div className="flex flex-col items-center text-center">
+                        <div className="relative mb-4">
+                          <img
+                            src={player.image}
+                            alt={player.name}
+                            className="w-24 h-24 rounded-full object-cover border-4 border-blue-500 shadow-lg"
+                          />
+                          <div className="absolute -bottom-2 -right-2 bg-green-500 rounded-full p-1 border-2 border-white">
+                            <FaUsers className="text-white text-sm" />
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-1">
+                          {player.name}
+                        </h3>
+                        <div className="bg-blue-500/20 px-4 py-2 rounded-full border border-blue-400/30">
+                          <p className="text-blue-300 font-semibold text-sm">
+                            {player.team}
+                          </p>
+                        </div>
+                        <div className="mt-4 flex gap-1">
+                          {[...Array(5)].map((_, i) => (
+                            <FaStar key={i} className="text-yellow-400 text-sm" />
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </motion.div>
+
+            {/* Scrolling Players Section */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="relative overflow-hidden bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+            >
+              <h3 className="text-2xl font-bold text-white text-center mb-8">
+                Recent Success Stories
+              </h3>
+
+              <div className="flex space-x-8 animate-scroll">
+                {[...players, ...players].map((player, index) => (
+                  <motion.div
+                    key={`${player.id}-${index}`}
+                    whileHover={{ scale: 1.1 }}
+                    className="flex-shrink-0 flex flex-col items-center text-center min-w-[120px]"
+                  >
+                    <img
+                      src={player.image}
+                      alt={player.name}
+                      className="w-16 h-16 rounded-full object-cover border-2 border-blue-400 mb-2"
+                    />
+                    <p className="text-white text-sm font-medium truncate w-full">
+                      {player.name}
+                    </p>
+                    <p className="text-blue-300 text-xs truncate w-full">
+                      {player.team}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+
+              <style jsx>{`
+            @keyframes scroll {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(calc(-120px * 10)); }
+            }
+            .animate-scroll {
+              animation: scroll 40s linear infinite;
+            }
+            .animate-scroll:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+            </motion.div>
+
+            {/* CTA Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="text-center mt-16"
+            >
+              <h3 className="text-3xl font-bold text-white mb-4">
+                Ready to Find Your Team?
+              </h3>
+              <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+                Join thousands of players who have found their perfect match through our platform
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
+              >
+                Get Started Today
+              </motion.button>
+            </motion.div>
           </div>
         </section>
-
 
       </div>
 

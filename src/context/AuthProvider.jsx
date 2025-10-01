@@ -1,39 +1,39 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import auth from '../firebase.init';
-export const AuthContext=createContext();
+export const AuthContext = createContext();
 
-const AuthProvider = ({children}) => {
-    const [user,setUser]=useState(null);
-    const [loading,setLoading]=useState(true);
-    const [sportsData,setSportsData]=useState([]);  
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [sportsData, setSportsData] = useState([]);
 
-    const createAccount=(email,password)=>{
+    const createAccount = (email, password) => {
         setLoading(true);
-        return createUserWithEmailAndPassword( auth,email,password);
+        return createUserWithEmailAndPassword(auth, email, password);
 
-      
+
     }
-    const userLogin=(email,password)=>{
+    const userLogin = (email, password) => {
         setLoading(true);
-            return signInWithEmailAndPassword(auth,email,password);
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
-    const userSingOut=()=>{
+    const userSingOut = () => {
         setLoading(true);
-              return signOut(auth)
+        return signOut(auth)
     }
-    useEffect(()=>{
-        const unsubscribe=onAuthStateChanged(auth,user=>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, user => {
             setUser(user);
-            console.log('auth state change',user);
+            console.log('auth state change', user);
             setLoading(false);
         })
 
-        return () =>{ unsubscribe()};
-    },[]);
+        return () => { unsubscribe() };
+    }, []);
 
-    const info={
+    const info = {
         createAccount,
         userLogin,
         userSingOut,

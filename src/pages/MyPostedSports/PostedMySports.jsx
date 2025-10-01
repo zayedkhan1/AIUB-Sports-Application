@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthProvider";
-import { myapplicationsPromise } from "../utlities/applicatoinApi";
+import { useContext, useEffect, useState } from "react";
+import { sportsCreatedByPromise } from "../../utlities/myapplicatoinAPI";
+import { AuthContext } from "../../context/AuthProvider";
 import {
   FiEye,
   FiEdit2,
@@ -13,8 +13,12 @@ import {
   FiFilter
 } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import { MdOutlineDateRange } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-const ApplicationList = () => {
+
+
+const PostedMySports = () => {
   const { user } = useContext(AuthContext);
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +28,7 @@ const ApplicationList = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    myapplicationsPromise(user.email)
+    sportsCreatedByPromise(user.email)
       .then((data) => {
         setApplications(data);
         setFilteredApplications(data);
@@ -156,6 +160,7 @@ const ApplicationList = () => {
     </div>
   );
 
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -167,10 +172,10 @@ const ApplicationList = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-            My Applications
+            My Posted Applications
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Track and manage all your job applications in one place
+            Track and manage all your Posted applications in one place
           </p>
         </motion.div>
 
@@ -241,9 +246,9 @@ const ApplicationList = () => {
                   <span className="text-sm font-semibold text-gray-100 uppercase tracking-wider">Team</span>
                 </div>
                 <div className="col-span-3">
-                  <span className="text-sm font-semibold text-gray-100 uppercase tracking-wider">Email</span>
+                  <span className="text-sm font-semibold text-gray-100 uppercase tracking-wider">Deadline</span>
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-2 text-end">
                   <span className="text-sm font-semibold text-gray-100 uppercase tracking-wider">Actions</span>
                 </div>
               </div>
@@ -270,7 +275,7 @@ const ApplicationList = () => {
                             <h3 className="font-semibold text-gray-900 text-lg">
                               {application.title || "No Title"}
                             </h3>
-                            <p className="text-sm text-gray-500 mt-1">Applied recently</p>
+                            <p className="text-sm text-gray-500 mt-1">Posted recently</p>
                           </div>
                         </div>
                       </div>
@@ -286,8 +291,8 @@ const ApplicationList = () => {
                       {/* Email Info */}
                       <div className="md:col-span-3">
                         <div className="flex items-center gap-2 text-gray-700">
-                          <FiMail className="text-gray-400" />
-                          <span className="text-sm md:text-base truncate">{application.email}</span>
+                          <MdOutlineDateRange className="text-gray-400" />
+                          <span className="text-sm md:text-base truncate">{application.date}</span>
                         </div>
                       </div>
 
@@ -295,15 +300,18 @@ const ApplicationList = () => {
                       <div className="md:col-span-2">
                         <div className="flex items-center justify-end gap-2">
                           {/* View Button */}
-                          <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => handleView(application)}
-                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 group"
-                            title="View Details"
-                          >
-                            <FiEye className="text-lg group-hover:scale-110 transition-transform duration-200" />
-                          </motion.button>
+                          <Link to={`/apply/${application._id}`}>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => handleView(application)}
+                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 group"
+                              title="View Details"
+                            >
+                              <FiEye className="text-lg group-hover:scale-110 transition-transform duration-200" />
+                            </motion.button>
+                          </Link>
+
 
                           {/* Edit Button */}
                           <motion.button
@@ -360,4 +368,7 @@ const ApplicationList = () => {
   );
 };
 
-export default ApplicationList;
+export default PostedMySports;
+
+
+

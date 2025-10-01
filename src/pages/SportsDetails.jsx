@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { 
-  FaMapMarkerAlt, 
-  FaCalendarAlt, 
-  FaClock, 
-  FaUsers, 
-  FaStar,
-  FaArrowRight,
-  FaShare,
-  FaBookmark
+import {
+    FaMapMarkerAlt,
+    FaCalendarAlt,
+    FaClock,
+    FaUsers,
+    FaStar,
+    FaArrowRight,
+    FaShare,
+    FaBookmark
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import sportsImg from '../assets/images/sportsimg.jpg';
@@ -64,7 +64,7 @@ const SportsDetails = () => {
     const handleApply = () => {
         // Add your apply logic here
         console.log('Applying for:', data.title);
-              
+
         console.log('Sports data set in context:', data);
     };
 
@@ -77,7 +77,7 @@ const SportsDetails = () => {
                 animate="visible"
             >
                 {/* Header */}
-                <motion.div 
+                <motion.div
                     className="text-center mb-12"
                     variants={itemVariants}
                 >
@@ -88,13 +88,13 @@ const SportsDetails = () => {
                 </motion.div>
 
                 {/* Main Content Card */}
-                <motion.div 
+                <motion.div
                     className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-8"
                     variants={itemVariants}
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
                         {/* Image Section */}
-                        <motion.div 
+                        <motion.div
                             className="relative"
                             variants={imageVariants}
                         >
@@ -102,13 +102,12 @@ const SportsDetails = () => {
                                 <motion.img
                                     src={sportsImg}
                                     alt="Sports"
-                                    className={`w-full h-64 lg:h-80 object-cover transition-all duration-500 ${
-                                        imageLoaded ? 'blur-0 scale-100' : 'blur-md scale-105'
-                                    }`}
+                                    className={`w-full h-64 lg:h-80 object-cover transition-all duration-500 ${imageLoaded ? 'blur-0 scale-100' : 'blur-md scale-105'
+                                        }`}
                                     onLoad={() => setImageLoaded(true)}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60"></div>
-                                
+
                                 {/* Badge */}
                                 <div className="absolute top-4 left-4">
                                     <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
@@ -120,30 +119,29 @@ const SportsDetails = () => {
                             {/* Action Buttons */}
                             <div className="flex gap-3 mt-6">
                                 <Link to={`/applysports/${data._id}`} >
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={handleApply}
-                                    className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3"
-                                >
-                                    Apply Now
-                                    <FaArrowRight className="text-sm" />
-                                </motion.button>
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={handleApply}
+                                        className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3"
+                                    >
+                                        Apply Now
+                                        <FaArrowRight className="text-sm" />
+                                    </motion.button>
                                 </Link>
-                                
+
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => setIsBookmarked(!isBookmarked)}
-                                    className={`p-4 rounded-xl border-2 transition-all duration-300 ${
-                                        isBookmarked 
-                                            ? 'bg-purple-100 border-purple-500 text-purple-600' 
+                                    className={`p-4 rounded-xl border-2 transition-all duration-300 ${isBookmarked
+                                            ? 'bg-purple-100 border-purple-500 text-purple-600'
                                             : 'bg-white border-gray-300 text-gray-600 hover:border-purple-400'
-                                    }`}
+                                        }`}
                                 >
                                     <FaBookmark className={isBookmarked ? 'fill-current' : ''} />
                                 </motion.button>
-                                
+
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
@@ -155,7 +153,7 @@ const SportsDetails = () => {
                         </motion.div>
 
                         {/* Details Section */}
-                        <motion.div 
+                        <motion.div
                             className="space-y-6"
                             variants={containerVariants}
                         >
@@ -171,7 +169,7 @@ const SportsDetails = () => {
                             </motion.div>
 
                             {/* Key Details Grid */}
-                            <motion.div 
+                            <motion.div
                                 className="grid grid-cols-1 sm:grid-cols-2 gap-4"
                                 variants={itemVariants}
                             >
@@ -227,32 +225,32 @@ const SportsDetails = () => {
                                 </p>
                             </motion.div>
 
-                           <div className='flex items-center justify-between'>
-                             {/* Experience Level */}
-                            <motion.div variants={itemVariants}>
-                                <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                                    <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-                                    Depertment
-                                </h3>
-                                <div className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full font-semibold">
-                                    {data.depertment}
-                                </div>
-                            </motion.div>
+                            <div className='flex items-center justify-between'>
+                                {/* Experience Level */}
+                                <motion.div variants={itemVariants}>
+                                    <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                                        <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                                        Depertment
+                                    </h3>
+                                    <div className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full font-semibold">
+                                        {data.depertment}
+                                    </div>
+                                </motion.div>
 
                                 <motion.div variants={itemVariants}>
-                                <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                                    <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-                                    Experience Level
-                                </h3>
-                                <div className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full font-semibold">
-                                    {data.level}
-                                </div>
-                            </motion.div>
-                           </div>
+                                    <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                                        <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                                        Experience Level
+                                    </h3>
+                                    <div className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full font-semibold">
+                                        {data.level}
+                                    </div>
+                                </motion.div>
+                            </div>
                         </motion.div>
 
 
-                        
+
                     </div>
                 </motion.div>
 

@@ -4,6 +4,7 @@ import { MdOutlineSignpost } from "react-icons/md";
 import navLogo from '../assets/images/aiubsportslogo.jpg'
 import { IoIosApps } from "react-icons/io";
 import { AuthContext } from '../context/AuthProvider';
+import { NavLink } from 'react-router-dom';
 const Navbar = () => {
   const {userSingOut,user}=useContext(AuthContext)
   const [isOpen, setIsOpen] = useState(false);
@@ -46,13 +47,28 @@ const Navbar = () => {
                 <FaHome className="mr-1" />
                 Home
               </a>
-              <a
+              {/* For reqruter */}
+            {
+              user && <>
+                <a
                 href="/postposition"
                 className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
               >
                 <MdOutlineSignpost className="mr-1" />
                 Post Position
               </a>
+
+                <a
+                 href="/mypostedjobs"
+                className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
+              >
+                <MdOutlineSignpost className="mr-1" />
+                My posted Jobs
+              </a>
+              
+              </>
+            }
+          {/* For applicant */}
            {
             user && <>
             <a

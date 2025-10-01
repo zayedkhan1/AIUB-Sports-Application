@@ -13,32 +13,37 @@ import PostPosition from "../pages/PostPosition";
 import SportsDetails from "../pages/SportsDetails";
 import ApplySports from "../pages/ApplySports";
 import MyApplications from "../pages/MyApplications";
+import PostedMySportsList from "../pages/MyPostedSports/PostedMySportsList";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
-  { 
-    path: "/about", 
-    element: <PrivateRoute><AboutUs /></PrivateRoute> 
+  {
+    path: "/about",
+    element: <PrivateRoute><AboutUs /></PrivateRoute>
   },
-  { 
-    path: "/postposition", 
-    element: <PrivateRoute><PostPosition /></PrivateRoute> 
+  {
+    path: "/postposition",
+    element: <PrivateRoute><PostPosition /></PrivateRoute>
   },
-  { 
-    path: "/apply/:id", 
+  {
+    path: "/apply/:id",
     element: <PrivateRoute><SportsDetails /></PrivateRoute>,
     loader: ({ params }) => fetch(`http://localhost:5000/sports/${params.id}`)
   },
   {
-    path:'/applysports/:id',
-    element:<PrivateRoute><ApplySports></ApplySports></PrivateRoute>
-    },
-    {
-      path:'/myapplications',
-      element:<PrivateRoute><MyApplications></MyApplications></PrivateRoute>
-    }
+    path: '/applysports/:id',
+    element: <PrivateRoute><ApplySports></ApplySports></PrivateRoute>
+  },
+  {
+    path: '/myapplications',
+    element: <PrivateRoute><MyApplications></MyApplications></PrivateRoute>
+  },
+  {
+    path: '/mypostedjobs',
+    element: <PrivateRoute><PostedMySportsList></PostedMySportsList> </PrivateRoute>
+  }
 ]);
 
 const Routers = () => {

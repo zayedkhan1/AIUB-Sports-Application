@@ -188,6 +188,34 @@ const PostPosition = () => {
                     </motion.p>
                   )}
                 </motion.div>
+                {/* Reqruter email */}
+                <motion.div variants={itemVariants} className="relative group">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2 ml-1">
+                    Team/Organization *
+                  </label>
+                  <div className="relative">
+                    <FaUsers className="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-500 text-lg z-10" />
+                    <input
+                      type="email"
+                      placeholder="Enter team or requter email"
+                      {...register("reqruter", { required: "Team or reqruter email is required" })}
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
+                        errors.reqruter 
+                          ? "border-red-400 focus:border-red-500" 
+                          : "border-gray-200 focus:border-purple-500 group-hover:border-purple-300"
+                      } focus:ring-4 focus:ring-purple-200 focus:outline-none`}
+                    />
+                  </div>
+                  {errors.reqruter && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-500 mt-2 text-sm flex items-center gap-1"
+                    >
+                      {errors.reqruter.message}
+                    </motion.p>
+                  )}
+                </motion.div>
 
                 {/* Sport Selection */}
                 <motion.div variants={itemVariants} className="relative group">
