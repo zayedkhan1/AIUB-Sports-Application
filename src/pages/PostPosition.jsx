@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { set, useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  FaUser, FaMapMarkerAlt, FaGraduationCap, FaCalendarAlt, FaClock, 
+import {
+  FaUser, FaMapMarkerAlt, FaGraduationCap, FaCalendarAlt, FaClock,
   FaVolleyballBall, FaFootballBall, FaBasketballBall, FaFutbol, FaChess,
   FaTrophy, FaUsers, FaRunning, FaSwimmer, FaTableTennis
 } from "react-icons/fa";
@@ -16,7 +16,7 @@ const PostPosition = () => {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-   
+
     try {
       const response = await fetch("http://localhost:5000/sports", {
         method: "POST",
@@ -30,7 +30,7 @@ const PostPosition = () => {
 
       if (result.success) {
         setShowSuccess(true);
-       
+
         reset();
         setTimeout(() => setShowSuccess(false), 3000);
       } else {
@@ -127,10 +127,10 @@ const PostPosition = () => {
         >
           <div className="p-8 md:p-12">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-              
+
               {/* Grid Layout for Form Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
+
                 {/* Position Title */}
                 <motion.div variants={itemVariants} className="relative group">
                   <label className="block text-sm font-semibold text-gray-700 mb-2 ml-1">
@@ -142,15 +142,14 @@ const PostPosition = () => {
                       type="text"
                       placeholder="e.g., Team Captain, Coach, Player"
                       {...register("title", { required: "Position title is required" })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
-                        errors.title 
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${errors.title
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-blue-500 group-hover:border-blue-300"
-                      } focus:ring-4 focus:ring-blue-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-blue-200 focus:outline-none`}
                     />
                   </div>
                   {errors.title && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -171,15 +170,14 @@ const PostPosition = () => {
                       type="text"
                       placeholder="Enter team or organization name"
                       {...register("team", { required: "Team name is required" })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
-                        errors.team 
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${errors.team
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-purple-500 group-hover:border-purple-300"
-                      } focus:ring-4 focus:ring-purple-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-purple-200 focus:outline-none`}
                     />
                   </div>
                   {errors.team && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -199,15 +197,14 @@ const PostPosition = () => {
                       type="email"
                       placeholder="Enter team or requter email"
                       {...register("reqruter", { required: "Team or reqruter email is required" })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
-                        errors.reqruter 
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${errors.reqruter
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-purple-500 group-hover:border-purple-300"
-                      } focus:ring-4 focus:ring-purple-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-purple-200 focus:outline-none`}
                     />
                   </div>
                   {errors.reqruter && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -226,11 +223,10 @@ const PostPosition = () => {
                     <FaTrophy className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-500 text-lg z-10" />
                     <select
                       {...register("sport", { required: "Please select a sport" })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 appearance-none ${
-                        errors.sport 
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 appearance-none ${errors.sport
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-blue-500 group-hover:border-blue-300"
-                      } focus:ring-4 focus:ring-blue-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-blue-200 focus:outline-none`}
                     >
                       <option value="">Select a Sport</option>
                       {sportsOptions.map((sport) => (
@@ -244,7 +240,7 @@ const PostPosition = () => {
                     </div>
                   </div>
                   {errors.sport && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -265,15 +261,14 @@ const PostPosition = () => {
                       type="text"
                       placeholder="City, State or Venue"
                       {...register("location", { required: "Location is required" })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
-                        errors.location 
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${errors.location
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-green-500 group-hover:border-green-300"
-                      } focus:ring-4 focus:ring-green-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-green-200 focus:outline-none`}
                     />
                   </div>
                   {errors.location && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -292,11 +287,10 @@ const PostPosition = () => {
                     <FaGraduationCap className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-500 text-lg z-10" />
                     <select
                       {...register("depertment", { required: "Please select a depertment" })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 appearance-none ${
-                        errors.depertment
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 appearance-none ${errors.depertment
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-yellow-500 group-hover:border-yellow-300"
-                      } focus:ring-4 focus:ring-yellow-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-yellow-200 focus:outline-none`}
                     >
                       <option value="">Select Depertment</option>
                       <option value="CSE">CSE 🟢</option>
@@ -305,14 +299,14 @@ const PostPosition = () => {
                       <option value="English">English🔴</option>
                       <option value="Social Science">Social science 🟢</option>
                       <option value="Social Science">All</option>
-                      
+
                     </select>
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
                       ▼
                     </div>
                   </div>
                   {errors.depertment && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -332,15 +326,14 @@ const PostPosition = () => {
                     <input
                       type="date"
                       {...register("date", { required: "Date is required" })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
-                        errors.date 
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${errors.date
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-pink-500 group-hover:border-pink-300"
-                      } focus:ring-4 focus:ring-pink-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-pink-200 focus:outline-none`}
                     />
                   </div>
                   {errors.date && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -359,15 +352,14 @@ const PostPosition = () => {
                     <input
                       type="time"
                       {...register("time", { required: "Time is required" })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
-                        errors.time 
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${errors.time
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-indigo-500 group-hover:border-indigo-300"
-                      } focus:ring-4 focus:ring-indigo-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-indigo-200 focus:outline-none`}
                     />
                   </div>
                   {errors.time && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -376,7 +368,7 @@ const PostPosition = () => {
                     </motion.p>
                   )}
                 </motion.div>
-                 <motion.div variants={itemVariants} className="relative group">
+                <motion.div variants={itemVariants} className="relative group">
                   <label className="block text-sm font-semibold text-gray-700 mb-2 ml-1">
                     Skill Level *
                   </label>
@@ -384,11 +376,10 @@ const PostPosition = () => {
                     <FaGraduationCap className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-500 text-lg z-10" />
                     <select
                       {...register("level", { required: "Please select a skill level" })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 appearance-none ${
-                        errors.level 
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 appearance-none ${errors.level
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-yellow-500 group-hover:border-yellow-300"
-                      } focus:ring-4 focus:ring-yellow-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-yellow-200 focus:outline-none`}
                     >
                       <option value="">Select Experience Level</option>
                       <option value="Beginner">Beginner 🟢</option>
@@ -401,7 +392,7 @@ const PostPosition = () => {
                     </div>
                   </div>
                   {errors.level && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -420,15 +411,14 @@ const PostPosition = () => {
                 <textarea
                   placeholder="Describe the position, requirements, responsibilities, and what you're looking for in a candidate..."
                   {...register("description", { required: "Description is required" })}
-                  className={`w-full px-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 resize-none ${
-                    errors.description 
-                      ? "border-red-400 focus:border-red-500" 
+                  className={`w-full px-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 resize-none ${errors.description
+                      ? "border-red-400 focus:border-red-500"
                       : "border-gray-200 focus:border-blue-500 group-hover:border-blue-300"
-                  } focus:ring-4 focus:ring-blue-200 focus:outline-none`}
+                    } focus:ring-4 focus:ring-blue-200 focus:outline-none`}
                   rows={5}
                 />
                 {errors.description && (
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -445,9 +435,8 @@ const PostPosition = () => {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-2xl shadow-xl transition-all duration-300 ${
-                    isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-2xl hover:from-blue-700 hover:to-purple-700'
-                  } relative overflow-hidden group`}
+                  className={`w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-2xl shadow-xl transition-all duration-300 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-2xl hover:from-blue-700 hover:to-purple-700'
+                    } relative overflow-hidden group`}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-3">
                     {isSubmitting ? (

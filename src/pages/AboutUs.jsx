@@ -5,7 +5,8 @@ import {
   FaArrowRight, FaQuoteLeft, FaGlobe,
   FaLightbulb, FaHandshake, FaStar,
   FaUserFriends,
-  FaPlay
+  FaPlay,
+  FaSearch
 } from 'react-icons/fa';
 import indoorgames from '../assets/images/aiubIndoorgames.png'
 

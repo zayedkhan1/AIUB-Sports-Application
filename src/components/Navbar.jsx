@@ -5,6 +5,7 @@ import navLogo from '../assets/images/aiubsportslogo.jpg'
 import { IoIosApps } from "react-icons/io";
 import { AuthContext } from '../context/AuthProvider';
 import { NavLink } from 'react-router-dom';
+import { MdOutlinePostAdd } from "react-icons/md";
 const Navbar = () => {
   const {userSingOut,user}=useContext(AuthContext)
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +48,19 @@ const Navbar = () => {
                 <FaHome className="mr-1" />
                 Home
               </a>
+                {
+            user && <>
+            <a
+                href="/myapplications"
+                className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
+              >
+                <IoIosApps className="mr-1" />
+                My Applications
+              </a>
+
+            
+            </>
+           }
               {/* For reqruter */}
             {
               user && <>
@@ -62,26 +76,14 @@ const Navbar = () => {
                  href="/mypostedjobs"
                 className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
               >
-                <MdOutlineSignpost className="mr-1" />
+                <MdOutlinePostAdd  className="mr-1" />
                 My posted Jobs
               </a>
               
               </>
             }
           {/* For applicant */}
-           {
-            user && <>
-            <a
-                href="/myapplications"
-                className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
-              >
-                <IoIosApps className="mr-1" />
-                My Applications
-              </a>
-
-            
-            </>
-           }
+         
               <a
                 href="/about"
                 className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"

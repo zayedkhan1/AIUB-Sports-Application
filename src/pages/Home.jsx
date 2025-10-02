@@ -36,6 +36,15 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 //player details
 import zayed from '../assets/players/zayed.jpg'
+import mostafiz from '../assets/players/mostafiz.jpg'
+import ashraful from '../assets/players/ashraful.jpg'
+import togor from '../assets/players/togor.jpg'
+import sami from '../assets/players/sami.jpg'
+import probal from '../assets/players/probal.jpg'
+import nahian from '../assets/players/nahian.jpg'
+import gopal from '../assets/players/gopal.jpg'
+import mahib from '../assets/players/mahib.jpg'
+import maruf from '../assets/players/maruf.jpg'
 
 const Home = () => {
   const [activeSport, setActiveSport] = useState('all'); // default: show all
@@ -102,26 +111,27 @@ const Home = () => {
 
   // Mock data - 20 players with team names
   const playerData = [
-    { id: 1, name: 'zayed khan', team: ' CS Mokingbard', image: zayed },
-    { id: 2, name: 'Marcus Chen', team: 'Dragon Warriors', image: '/api/placeholder/150/150' },
-    { id: 3, name: 'Sarah Williams', team: 'Phoenix United', image: '/api/placeholder/150/150' },
-    { id: 4, name: 'James Rodriguez', team: 'Eagle FC', image: '/api/placeholder/150/150' },
-    { id: 5, name: 'Lisa Thompson', team: 'Tiger FC', image: '/api/placeholder/150/150' },
-    { id: 6, name: 'Mike Peterson', team: 'Lion Hearts', image: '/api/placeholder/150/150' },
-    { id: 7, name: 'Emma Davis', team: 'Shark FC', image: '/api/placeholder/150/150' },
-    { id: 8, name: 'David Wilson', team: 'Bear United', image: '/api/placeholder/150/150' },
-    { id: 9, name: 'Sophia Martinez', team: 'Wolf Pack', image: '/api/placeholder/150/150' },
-    { id: 10, name: 'Ryan Kim', team: 'Hawk FC', image: '/api/placeholder/150/150' },
-    { id: 11, name: 'Olivia Brown', team: 'Panther FC', image: '/api/placeholder/150/150' },
-    { id: 12, name: 'Kevin Taylor', team: 'Falcon United', image: '/api/placeholder/150/150' },
-    { id: 13, name: 'Natalie Lee', team: 'Cobra FC', image: '/api/placeholder/150/150' },
-    { id: 14, name: 'Chris Evans', team: 'Rhino FC', image: '/api/placeholder/150/150' },
-    { id: 15, name: 'Amanda Scott', team: 'Jaguar United', image: '/api/placeholder/150/150' },
-    { id: 16, name: 'Daniel White', team: 'Scorpion FC', image: '/api/placeholder/150/150' },
-    { id: 17, name: 'Jessica Hall', team: 'Viper United', image: '/api/placeholder/150/150' },
-    { id: 18, name: 'Brian Clark', team: 'Puma FC', image: '/api/placeholder/150/150' },
-    { id: 19, name: 'Michelle Adams', team: 'Leopard United', image: '/api/placeholder/150/150' },
-    { id: 20, name: 'Jason Miller', team: 'Cheetah FC', image: '/api/placeholder/150/150' }
+    { id: 1, name: 'zayed khan', team: ' CS Bitcoin', image: zayed },
+    { id: 2, name: 'Maruf', team: 'Cs Theta', image: maruf },
+    { id: 3, name: 'Mahib Khan', team: 'CS Ether', image: mahib },
+    { id: 4, name: 'CS Gopal', team: 'CS Doge', image: gopal },
+    { id: 5, name: 'Ashraful', team: 'CS Bonk', image: ashraful },
+    { id: 6, name: 'Fahad Togor', team: 'CS Pepe', image: togor },
+    { id: 7, name: 'Sami', team: 'CS Ton', image: sami },
+    { id: 8, name: 'Mostafizur Rahman', team: 'Tornedo Fc', image: mostafiz },
+    { id: 9, name: 'Probal', team: 'Tronex Fc', image: probal },
+    { id: 10, name: 'Nahian', team: 'Hawk FC', image: nahian },
+    { id: 11, name: 'zayed khan', team: ' CS Bitcoin', image: zayed },
+    { id: 12, name: 'Maruf', team: 'Cs Theta', image: maruf },
+    { id: 13, name: 'Mahib Khan', team: 'CS Ether', image: mahib },
+    { id: 14, name: 'CS Gopal', team: 'CS Doge', image: gopal },
+    { id: 15, name: 'Ashraful', team: 'CS Bonk', image: ashraful },
+    { id: 16, name: 'Fahad Togor', team: 'CS Pepe', image: togor },
+    { id: 17, name: 'Sami', team: 'CS Ton', image: sami },
+    { id: 18, name: 'Mostafizur Rahman', team: 'Tornedo Fc', image: mostafiz },
+    { id: 19, name: 'Probal', team: 'Tronex Fc', image: probal },
+    { id: 20, name: 'Nahian', team: 'Hawk FC', image: nahian },
+  
   ];
   useEffect(() => {
     // Shuffle players randomly
@@ -212,20 +222,25 @@ const Home = () => {
                 Connect with players and teams that match your skills and ambitions. Whether you're looking to join a team or find players, we've got you covered.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <motion.button
+
+                
+                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-xl px-8 py-4 shadow-md hover:shadow-lg transition-all"
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-xl px-8 py-4 shadow-md hover:shadow-lg transition-all cursor-pointer"
                 >
                   Find a Team
                 </motion.button>
+                
+               <Link to='/postposition'>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-white text-slate-800 border border-slate-200 font-medium rounded-xl px-8 py-4 shadow-sm hover:shadow-md transition-all"
+                  className="bg-white text-slate-800 border border-slate-200 font-medium rounded-xl px-8 py-4 shadow-sm hover:shadow-md transition-all cursor-pointer"
                 >
                   Post a Position
                 </motion.button>
+                </Link>
               </div>
             </motion.div>
 
@@ -515,8 +530,8 @@ const Home = () => {
                         <h3 className="text-xl font-bold text-white mb-1">
                           {player.name}
                         </h3>
-                        <div className="bg-blue-500/20 px-4 py-2 rounded-full border border-blue-400/30">
-                          <p className="text-blue-300 font-semibold text-sm">
+                        <div className="bg-blue-600/50 px-4 py-2 rounded-full border border-blue-400/30">
+                          <p className="text-gray-100 font-semibold text-sm">
                             {player.team}
                           </p>
                         </div>
@@ -558,7 +573,7 @@ const Home = () => {
                     <p className="text-white text-sm font-medium truncate w-full">
                       {player.name}
                     </p>
-                    <p className="text-blue-300 text-xs truncate w-full">
+                    <p className="text-gray-100 text-xs truncate w-full">
                       {player.team}
                     </p>
                   </motion.div>

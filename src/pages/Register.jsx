@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaFutbol, FaUser, FaUserPlus, FaCrown, FaLeaf, FaIdCard, FaVenusMars,FaCodepen, FaCode } from 'react-icons/fa';
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaFutbol, FaUser, FaUserPlus, FaCrown, FaLeaf, FaIdCard, FaVenusMars, FaCodepen, FaCode } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 
@@ -8,7 +8,7 @@ const Register = () => {
   const { createAccount } = useContext(AuthContext)
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -41,25 +41,25 @@ const Register = () => {
     // Handle registration logic here
     console.log('Registering with:', formData.email, formData.password);
     createAccount(formData.email, formData.password)
-    .then(result=>{
-      const user=result.user;
-      console.log(user);
-      alert('Account Created Successfully');
-      navigate('/login');
-    })
-    .catch(error=>{
-      console.log(error.message);
-    })
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        alert('Account Created Successfully');
+        navigate('/login');
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 text-slate-800 flex flex-col">
-   
+
       {/* Main Content */}
       <main className="flex flex-1 items-center justify-center px-4 py-6">
         <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-6xl">
           {/* Left Column - Illustration */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
@@ -68,7 +68,7 @@ const Register = () => {
             <div className="relative">
               <div className="absolute -top-6 -left-6 w-24 h-24 bg-blue-100 rounded-full opacity-50"></div>
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-purple-100 rounded-full opacity-50"></div>
-              
+
               <div className="relative bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
                 <div className="w-80 h-80 flex items-center justify-center">
                   <div className="text-center">
@@ -87,9 +87,9 @@ const Register = () => {
               </div>
             </div>
           </motion.div>
-          
+
           {/* Right Column - Registration Form */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -100,7 +100,7 @@ const Register = () => {
                 <h2 className="text-3xl font-bold text-slate-800 mb-2">Create Account</h2>
                 <p className="text-slate-500">Join our sports community today</p>
               </div>
-              
+
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="relative">
@@ -117,7 +117,7 @@ const Register = () => {
                       required
                     />
                   </div>
-                  
+
                   <div className="relative">
                     <input
                       type="text"
@@ -130,7 +130,7 @@ const Register = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <FaEnvelope className="text-slate-400" />
@@ -145,7 +145,7 @@ const Register = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -172,7 +172,7 @@ const Register = () => {
                       )}
                     </button>
                   </div>
-                  
+
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                       <FaLock className="text-slate-400" />
@@ -199,7 +199,7 @@ const Register = () => {
                     </button>
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -218,7 +218,7 @@ const Register = () => {
                       <option value="scout">Scout</option>
                     </select>
                   </div>
-                  
+
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                       <FaCodepen className="text-slate-400" />
@@ -240,7 +240,7 @@ const Register = () => {
                     </select>
                   </div>
                 </div>
-                
+
                 <div className="relative">
                   <input
                     type="id"
@@ -251,7 +251,7 @@ const Register = () => {
                     placeholder="University ID"
                   />
                 </div>
-                
+
                 <div className="flex items-center">
                   <input
                     id="terms"
@@ -264,7 +264,7 @@ const Register = () => {
                     I agree to the <a href="#" className="text-blue-500 hover:text-blue-600">Terms of Service</a> and <a href="#" className="text-blue-500 hover:text-blue-600">Privacy Policy</a>
                   </label>
                 </div>
-                
+
                 <div>
                   <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -276,7 +276,7 @@ const Register = () => {
                   </motion.button>
                 </div>
               </form>
-              
+
               <div className="mt-8 text-center">
                 <Link to='/login' className="text-slate-500 text-sm">
                   Already have an account?{' '}
@@ -287,7 +287,7 @@ const Register = () => {
               </div>
 
               {/* Premium badge */}
-              <motion.div 
+              <motion.div
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.5 }}
@@ -304,12 +304,12 @@ const Register = () => {
           </motion.div>
         </div>
       </main>
-      
+
       {/* Floating elements for visual interest */}
       <div className="hidden lg:block fixed bottom-10 left-10 w-24 h-24 bg-blue-100 rounded-full opacity-20 animate-pulse"></div>
       <div className="hidden lg:block fixed top-20 right-20 w-16 h-16 bg-purple-100 rounded-full opacity-30 animate-bounce"></div>
       <div className="hidden lg:block fixed top-1/3 left-1/4 w-12 h-12 bg-green-100 rounded-full opacity-40 animate-ping"></div>
-      
+
       {/* Footer */}
       {/* <footer className="container mx-auto px-4 py-6 text-center text-slate-500 text-sm mt-8">
         <p>© 2023 SportConnect. All rights reserved.</p>
