@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaFutbol, FaUser, FaUserPlus, FaCrown, FaLeaf, FaIdCard, FaVenusMars, FaCodepen, FaCode } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
+import SocialLogin from './SocialLogin/SocialLogin';
 
 const Register = () => {
   const { createAccount } = useContext(AuthContext)
@@ -285,6 +286,7 @@ const Register = () => {
                   </p>
                 </Link>
               </div>
+              <SocialLogin></SocialLogin>
 
               {/* Premium badge */}
               <motion.div
@@ -310,16 +312,7 @@ const Register = () => {
       <div className="hidden lg:block fixed top-20 right-20 w-16 h-16 bg-purple-100 rounded-full opacity-30 animate-bounce"></div>
       <div className="hidden lg:block fixed top-1/3 left-1/4 w-12 h-12 bg-green-100 rounded-full opacity-40 animate-ping"></div>
 
-      {/* Footer */}
-      {/* <footer className="container mx-auto px-4 py-6 text-center text-slate-500 text-sm mt-8">
-        <p>© 2023 SportConnect. All rights reserved.</p>
-        <div className="mt-2 space-x-4">
-          <a href="#" className="hover:text-blue-500">Terms</a>
-          <a href="#" className="hover:text-blue-500">Privacy</a>
-          <a href="#" className="hover:text-blue-500">Help</a>
-          <a href="#" className="hover:text-blue-500">Contact</a>
-        </div>
-      </footer> */}
+
     </div>
   );
 };

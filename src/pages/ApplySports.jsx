@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { set, useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  FaUser, 
-  FaEnvelope, 
-  FaPhone, 
-  FaUsers, 
+import {
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaUsers,
   FaClipboardList,
   FaTrophy,
   FaPaperPlane,
@@ -16,24 +16,24 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 const ApplySports = () => {
-  const params=useParams();
+  const params = useParams();
   console.log(params.id)
-    const navigate=useNavigate();
-  const { 
-    register, 
-    handleSubmit, 
-    formState: { errors }, 
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
     reset,
-    watch 
+    watch
   } = useForm();
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState(null);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-   
+
     // Simulate API call
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
@@ -41,7 +41,7 @@ const ApplySports = () => {
       setShowSuccess(true);
 
       reset();
-      
+
       setTimeout(() => {
         setShowSuccess(false);
         setFormData(null);
@@ -52,19 +52,21 @@ const ApplySports = () => {
       setIsSubmitting(false);
     }
     const applicationData = {
-        name: data.name,
-        email: data.email,
-        sportId:params.id
+      name: data.name,
+      email: data.email,
+      sportId: params.id,
+      teams_id: data.teams_id,
+      phone: data.mobile,
 
 
-    
+
     }
-      axios.post('http://localhost:5000/applications', applicationData)
+    axios.post('http://localhost:5000/applications', applicationData)
       .then(response => {
         console.log('Application submitted successfully:', response.data);
-         navigate('/myapplications');
+        navigate('/myapplications');
 
-    })
+      })
       .catch(error => {
         console.error('Error submitting application:', error);
       });
@@ -94,8 +96,8 @@ const ApplySports = () => {
 
   const successVariants = {
     hidden: { scale: 0.8, opacity: 0 },
-    visible: { 
-      scale: 1, 
+    visible: {
+      scale: 1,
       opacity: 1,
       transition: {
         type: "spring",
@@ -103,8 +105,8 @@ const ApplySports = () => {
         damping: 20
       }
     },
-    exit: { 
-      scale: 0.8, 
+    exit: {
+      scale: 0.8,
       opacity: 0,
       transition: {
         duration: 0.3
@@ -129,7 +131,7 @@ const ApplySports = () => {
               <div>
                 <h3 className="font-bold text-lg">Application Submitted!</h3>
                 <p className="text-green-100 text-sm mt-1">
-                 Thank you for applying. We'll review your application shortly.
+                  Thank you for applying. We'll review your application shortly.
                 </p>
               </div>
             </div>
@@ -173,7 +175,7 @@ const ApplySports = () => {
         >
           <div className="p-8 md:p-10">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              
+
               {/* Full Name */}
               <motion.div variants={itemVariants} className="relative group">
                 <label className="block text-sm font-semibold text-gray-700 mb-2 ml-1">
@@ -184,22 +186,21 @@ const ApplySports = () => {
                   <input
                     type="text"
                     placeholder="Enter your full name"
-                    {...register("name", { 
+                    {...register("name", {
                       required: "Full name is required",
                       minLength: {
                         value: 2,
                         message: "Name must be at least 2 characters"
                       }
                     })}
-                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
-                      errors.name 
-                        ? "border-red-400 focus:border-red-500" 
+                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${errors.name
+                        ? "border-red-400 focus:border-red-500"
                         : "border-gray-200 focus:border-blue-500 group-hover:border-blue-300"
-                    } focus:ring-4 focus:ring-blue-200 focus:outline-none`}
+                      } focus:ring-4 focus:ring-blue-200 focus:outline-none`}
                   />
                 </div>
                 {errors.name && (
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -218,28 +219,27 @@ const ApplySports = () => {
                   <FaIdCard className="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-500 text-lg z-10" />
                   <input
                     type="text"
-                    placeholder="Enter your team ID"
-                    {...register("teamId", { 
-                      required: "Team ID is required",
+                    placeholder="Enter your teams_ID"
+                    {...register("teams_id", {
+                      required: "Teams_ID is required",
                       pattern: {
                         value: /^[A-Za-z0-9-_]+$/,
                         message: "Team ID can only contain letters, numbers, hyphens, and underscores"
                       }
                     })}
-                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
-                      errors.teamId 
-                        ? "border-red-400 focus:border-red-500" 
+                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${errors.teams_id
+                        ? "border-red-400 focus:border-red-500"
                         : "border-gray-200 focus:border-purple-500 group-hover:border-purple-300"
-                    } focus:ring-4 focus:ring-purple-200 focus:outline-none`}
+                      } focus:ring-4 focus:ring-purple-200 focus:outline-none`}
                   />
                 </div>
-                {errors.teamId && (
-                  <motion.p 
+                {errors.teams_id && (
+                  <motion.p
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-red-500 mt-2 text-sm flex items-center gap-1"
                   >
-                    {errors.teamId.message}
+                    {errors.teams_id.message}
                   </motion.p>
                 )}
               </motion.div>
@@ -256,22 +256,21 @@ const ApplySports = () => {
                     <input
                       type="email"
                       placeholder="your.email@example.com"
-                      {...register("email", { 
+                      {...register("email", {
                         required: "Email is required",
                         pattern: {
                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                           message: "Invalid email address"
                         }
                       })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
-                        errors.email 
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${errors.email
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-green-500 group-hover:border-green-300"
-                      } focus:ring-4 focus:ring-green-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-green-200 focus:outline-none`}
                     />
                   </div>
                   {errors.email && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -291,22 +290,21 @@ const ApplySports = () => {
                     <input
                       type="tel"
                       placeholder="+1 (555) 123-4567"
-                      {...register("mobile", { 
+                      {...register("mobile", {
                         required: "Mobile number is required",
                         pattern: {
                           value: /^[\+]?[1-9][\d]{0,15}$/,
                           message: "Please enter a valid mobile number"
                         }
                       })}
-                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${
-                        errors.mobile 
-                          ? "border-red-400 focus:border-red-500" 
+                      className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 ${errors.mobile
+                          ? "border-red-400 focus:border-red-500"
                           : "border-gray-200 focus:border-orange-500 group-hover:border-orange-300"
-                      } focus:ring-4 focus:ring-orange-200 focus:outline-none`}
+                        } focus:ring-4 focus:ring-orange-200 focus:outline-none`}
                     />
                   </div>
                   {errors.mobile && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -326,11 +324,10 @@ const ApplySports = () => {
                   <FaUsers className="absolute left-4 top-1/2 transform -translate-y-1/2 text-indigo-500 text-lg z-10" />
                   <select
                     {...register("experience", { required: "Please select your experience level" })}
-                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 appearance-none ${
-                      errors.experience 
-                        ? "border-red-400 focus:border-red-500" 
+                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 appearance-none ${errors.experience
+                        ? "border-red-400 focus:border-red-500"
                         : "border-gray-200 focus:border-indigo-500 group-hover:border-indigo-300"
-                    } focus:ring-4 focus:ring-indigo-200 focus:outline-none`}
+                      } focus:ring-4 focus:ring-indigo-200 focus:outline-none`}
                   >
                     <option value="">Select your experience</option>
                     <option value="new">New Player - First time in tournament</option>
@@ -342,7 +339,7 @@ const ApplySports = () => {
                   </div>
                 </div>
                 {errors.experience && (
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -361,7 +358,7 @@ const ApplySports = () => {
                   <FaClipboardList className="absolute left-4 top-4 text-cyan-500 text-lg z-10" />
                   <textarea
                     placeholder="Tell us about your sports background, achievements, why you want to join, and any other relevant information..."
-                    {...register("description", { 
+                    {...register("description", {
                       required: "Description is required",
                       minLength: {
                         value: 50,
@@ -372,16 +369,15 @@ const ApplySports = () => {
                         message: "Description must not exceed 1000 characters"
                       }
                     })}
-                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 resize-none ${
-                      errors.description 
-                        ? "border-red-400 focus:border-red-500" 
+                    className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 resize-none ${errors.description
+                        ? "border-red-400 focus:border-red-500"
                         : "border-gray-200 focus:border-cyan-500 group-hover:border-cyan-300"
-                    } focus:ring-4 focus:ring-cyan-200 focus:outline-none`}
+                      } focus:ring-4 focus:ring-cyan-200 focus:outline-none`}
                     rows={5}
                   />
                 </div>
                 {errors.description && (
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-red-500 mt-2 text-sm flex items-center gap-1"
@@ -401,9 +397,8 @@ const ApplySports = () => {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-2xl shadow-xl transition-all duration-300 ${
-                    isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-2xl hover:from-blue-700 hover:to-purple-700'
-                  } relative overflow-hidden group`}
+                  className={`w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-2xl shadow-xl transition-all duration-300 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-2xl hover:from-blue-700 hover:to-purple-700'
+                    } relative overflow-hidden group`}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-3">
                     {isSubmitting ? (

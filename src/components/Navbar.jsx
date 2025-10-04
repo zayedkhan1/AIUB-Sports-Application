@@ -6,6 +6,7 @@ import { IoIosApps } from "react-icons/io";
 import { AuthContext } from '../context/AuthProvider';
 import { NavLink } from 'react-router-dom';
 import { MdOutlinePostAdd } from "react-icons/md";
+import { AiOutlineTeam } from "react-icons/ai";
 const Navbar = () => {
   const {userSingOut,user}=useContext(AuthContext)
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +48,13 @@ const Navbar = () => {
               >
                 <FaHome className="mr-1" />
                 Home
+              </a>
+              <a
+                href="/findteam"
+                className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-300"
+              >
+                <AiOutlineTeam className="mr-1" />
+                Find Team
               </a>
                 {
             user && <>

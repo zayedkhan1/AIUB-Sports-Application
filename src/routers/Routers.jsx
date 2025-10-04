@@ -14,6 +14,7 @@ import SportsDetails from "../pages/SportsDetails";
 import ApplySports from "../pages/ApplySports";
 import MyApplications from "../pages/MyApplications";
 import PostedMySportsList from "../pages/MyPostedSports/PostedMySportsList";
+import FindTeam from "../pages/FindTeam";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: '/mypostedjobs',
     element: <PrivateRoute><PostedMySportsList></PostedMySportsList> </PrivateRoute>
+  },
+  {
+    path: '/findteam',
+    element: <PrivateRoute><FindTeam /></PrivateRoute>
   }
 ]);
 

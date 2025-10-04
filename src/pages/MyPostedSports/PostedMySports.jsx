@@ -10,11 +10,15 @@ import {
   FiUsers,
   FiChevronRight,
   FiSearch,
-  FiFilter
+  FiFilter,
+  FiUser
 } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdOutlineDateRange } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { FiX, FiPhone, FiAward, } from 'react-icons/fi';
+import { IoCloseCircleOutline } from "react-icons/io5"; // Close icon
+
 
 
 
@@ -24,6 +28,21 @@ const PostedMySports = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredApplications, setFilteredApplications] = useState([]);
+
+  const [selectedApplicants, setSelectedApplicants] = useState(null);
+
+
+
+  const handleApplicants = async (application) => {
+    try {
+      const res = await fetch(`http://localhost:5000/applications/bySport/${application._id}`);
+      const data = await res.json();
+      setSelectedApplicants(data);
+    } catch (error) {
+      console.error("Error fetching applicants:", error);
+    }
+  };
+
 
   useEffect(() => {
     if (!user?.email) return;
@@ -239,16 +258,19 @@ const PostedMySports = () => {
             <>
               {/* Table Header */}
               <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4 border-b border-gray-200 hidden md:grid grid-cols-12 gap-4">
-                <div className="col-span-4">
+                <div className="col-span-3">
                   <span className="text-sm font-semibold text-gray-100 uppercase tracking-wider">Position</span>
                 </div>
-                <div className="col-span-3">
+                <div className="col-span-2">
                   <span className="text-sm font-semibold text-gray-100 uppercase tracking-wider">Team</span>
                 </div>
-                <div className="col-span-3">
+                <div className="col-span-2">
                   <span className="text-sm font-semibold text-gray-100 uppercase tracking-wider">Deadline</span>
                 </div>
-                <div className="col-span-2 text-end">
+                <div className="col-span-2">
+                  <span className="text-sm font-semibold text-gray-100 uppercase tracking-wider">Applicant Info</span>
+                </div>
+                <div className="col-span-3  text-center">
                   <span className="text-sm font-semibold text-gray-100 uppercase tracking-wider">Actions</span>
                 </div>
               </div>
@@ -264,10 +286,10 @@ const PostedMySports = () => {
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     className="border-b border-gray-100 last:border-b-0 hover:bg-gray-50/50 transition-all duration-300"
                   >
-                    <div className="px-6 py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    <div className="px-6 py-6 grid grid-cols-1 md:grid-cols-12 gap-2 items-center">
                       {/* Position Info */}
-                      <div className="md:col-span-4">
-                        <div className="flex items-center gap-3">
+                      <div className="md:col-span-3">
+                        <div className="flex items-center gap-1">
                           <div className="p-2 bg-blue-100 rounded-lg">
                             <FiBriefcase className="text-blue-600 text-lg" />
                           </div>
@@ -281,24 +303,133 @@ const PostedMySports = () => {
                       </div>
 
                       {/* Team Info */}
-                      <div className="md:col-span-3">
-                        <div className="flex items-center gap-2 text-gray-700">
+                      <div className="md:col-span-2">
+                        <div className="flex items-center gap-1 text-gray-700">
                           <FiUsers className="text-gray-400" />
                           <span className="font-medium">{application.team || "No Team"}</span>
                         </div>
                       </div>
 
                       {/* Email Info */}
-                      <div className="md:col-span-3">
-                        <div className="flex items-center gap-2 text-gray-700">
+                      <div className="md:col-span-2">
+                        <div className="flex items-center gap-1 text-gray-700">
                           <MdOutlineDateRange className="text-gray-400" />
                           <span className="text-sm md:text-base truncate">{application.date}</span>
                         </div>
                       </div>
 
+                      {/* applicant info */}
+                      <div className="md:col-span-3">
+                        {/* View Applicants Button */}
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handleApplicants(application)}
+                          className="p-2 text-indigo-600 hover:bg-indigo-50 flex items-center justify-center gap-1 rounded-lg transition-colors duration-200 group"
+                          title="View Applicants"
+                        >
+                          <FiUsers className="text-lg group-hover:scale-110 transition-transform duration-200" /> Applicant info
+                        </motion.button>
+                        {selectedApplicants && (
+                          <div className="fixed inset-0 z-50 flex items-center justify-center">
+                            {/* Backdrop with fade-in animation */}
+                            <div
+                              className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+                              onClick={() => setSelectedApplicants(null)}
+                            />
+
+                            {/* Modal container with slide-up animation */}
+                            <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-hidden animate-in slide-in-from-bottom-10 duration-300">
+
+                              {/* Header */}
+                              <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center space-x-3">
+                                    <div className="p-2 bg-white/20 rounded-lg">
+                                      <FiUsers className="text-2xl" />
+                                    </div>
+                                    <div>
+                                      <h2 className="text-2xl font-bold">Applicants</h2>
+                                      <p className="text-indigo-100 flex items-center space-x-1">
+                                        <span>Total Applicants: {selectedApplicants.totalApplicants}</span>
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <button
+                                    onClick={() => setSelectedApplicants(null)}
+                                    className="p-2 hover:bg-white/20 rounded-full transition-all duration-200 hover:scale-110"
+                                  >
+                                    <FiX className="text-xl" />
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Content */}
+                              <div className="p-6">
+                                {/* Applicants List */}
+                                <div className="space-y-4 max-h-96 overflow-y-auto p-4 ">
+                                  {selectedApplicants.applicants.map((applicant, idx) => (
+                                    <div
+                                      key={idx}
+                                      className="group p-4 border border-gray-200 rounded-xl hover:border-indigo-300 hover:shadow-md transition-all hover:scale-102 duration-300 "
+                                    >
+                                      <div className="flex items-start justify-between">
+                                        <ul className="flex-1 min-w-0">
+                                          <li className="flex items-center space-x-3 mb-2">
+                                            <div className="p-2 bg-indigo-100 rounded-lg group-hover:bg-indigo-200 transition-colors">
+                                              <FiUser className="text-indigo-600" />
+                                            </div>
+                                            <div className="min-w-0 flex-1">
+                                              <h3 className="font-semibold text-gray-900 truncate">
+                                                {applicant.name}
+                                              </h3>
+                                              <div className="flex flex-wrap gap-4 mt-2">
+                                                <div className="flex items-center space-x-2 text-sm text-gray-600">
+                                                  <FiMail className="text-gray-400" />
+                                                  <span className="truncate max-w-[150px]">{applicant.email}</span>
+                                                </div>
+                                                <div className="flex items-center space-x-2 text-sm text-gray-600">
+                                                  <FiPhone className="text-gray-400" />
+                                                  <span>{applicant.phone}</span>
+                                                </div>
+                                                <div className="flex items-center space-x-2 text-sm text-gray-600">
+                                                  <FiAward className="text-gray-400" />
+                                                  <span>Teams ID: {applicant.teams_id}</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </li>
+                                        </ul>
+                                        <div className="flex items-center space-x-2 ml-4">
+                                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                                            {applicant.team}
+                                          </span>
+                                          <FiChevronRight className="text-gray-400 group-hover:text-indigo-600 transition-colors" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+
+                                {/* Footer */}
+                                <div className="mt-6 pt-6 border-t border-gray-200">
+                                  <button
+                                    onClick={() => setSelectedApplicants(null)}
+                                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                  >
+                                    Close
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                      </div>
+
                       {/* Actions */}
-                      <div className="md:col-span-2">
-                        <div className="flex items-center justify-end gap-2">
+                      <div className="md:col-span-1">
+                        <div className="flex items-center justify-end gap-1">
                           {/* View Button */}
                           <Link to={`/apply/${application._id}`}>
                             <motion.button

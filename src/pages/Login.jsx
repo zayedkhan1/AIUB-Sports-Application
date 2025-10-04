@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaFutbol, FaUserPlus, FaLeaf, FaCrown } from 'react-icons/fa';
 import { Link, useNavigate, useNavigation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
+import SocialLogin from './SocialLogin/SocialLogin';
 
 const Login = () => {
   const { userLogin } = useContext(AuthContext);
@@ -10,7 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -21,24 +22,24 @@ const Login = () => {
     // Handle login logic here
     console.log('Logging in with:', { email, password, rememberMe });
     userLogin(email, password)
-    .then(result=>{
-      const user=result.user;
-      console .log(user);
-      alert('Login Successful');
-      navigate('/');
-    } ).catch(error=>{
-      console.log(error.message);
-    })  
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        alert('Login Successful');
+        navigate('/');
+      }).catch(error => {
+        console.log(error.message);
+      })
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 text-slate-800 flex flex-col ">
-      
+
       {/* Main Content */}
       <main className="flex flex-1 items-center justify-center px-4 py-10">
         <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-6xl">
           {/* Left Column - Illustration */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
@@ -47,7 +48,7 @@ const Login = () => {
             <div className="relative">
               <div className="absolute -top-6 -left-6 w-24 h-24 bg-blue-100 rounded-full opacity-50"></div>
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-purple-100 rounded-full opacity-50"></div>
-              
+
               <div className="relative bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
                 <div className="w-80 h-80 flex items-center justify-center">
                   <div className="text-center">
@@ -66,9 +67,9 @@ const Login = () => {
               </div>
             </div>
           </motion.div>
-          
+
           {/* Right Column - Login Form */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -79,7 +80,7 @@ const Login = () => {
                 <h2 className="text-3xl font-bold text-slate-800 mb-2">Welcome Back</h2>
                 <p className="text-slate-500">Sign in to your SportConnect account</p>
               </div>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -94,7 +95,7 @@ const Login = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <FaLock className="text-slate-400" />
@@ -119,7 +120,7 @@ const Login = () => {
                     )}
                   </button>
                 </div>
-                
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <input
@@ -134,14 +135,14 @@ const Login = () => {
                       Remember me
                     </label>
                   </div>
-                  
+
                   <div className="text-sm">
                     <a href="#" className="font-medium text-blue-500 hover:text-blue-600">
                       Forgot password?
                     </a>
                   </div>
                 </div>
-                
+
                 <div>
                   <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -153,7 +154,7 @@ const Login = () => {
                   </motion.button>
                 </div>
               </form>
-              
+
               <div className="mt-8 text-center">
                 <p className="text-slate-500 text-sm">
                   Don't have an account?{' '}
@@ -162,9 +163,10 @@ const Login = () => {
                   </Link>
                 </p>
               </div>
+              <SocialLogin></SocialLogin>
 
               {/* Premium badge */}
-              <motion.div 
+              <motion.div
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.5 }}
@@ -181,20 +183,11 @@ const Login = () => {
           </motion.div>
         </div>
       </main>
-      
+
       {/* Floating elements for visual interest */}
       <div className="hidden lg:block fixed bottom-10 left-10 w-24 h-24 bg-blue-100 rounded-full opacity-20 animate-pulse"></div>
       <div className="hidden lg:block fixed top-20 right-20 w-16 h-16 bg-purple-100 rounded-full opacity-30 animate-bounce"></div>
-      
-      {/* Footer */}
-      {/* <footer className="container mx-auto px-4 py-6 text-center text-slate-500 text-sm">
-        <p>© 2023 SportConnect. All rights reserved.</p>
-        <div className="mt-2 space-x-4">
-          <a href="#" className="hover:text-blue-500">Terms</a>
-          <a href="#" className="hover:text-blue-500">Privacy</a>
-          <a href="#" className="hover:text-blue-500">Help</a>
-        </div>
-      </footer> */}
+
     </div>
   );
 };

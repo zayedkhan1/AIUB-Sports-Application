@@ -13,6 +13,7 @@ import {
   FiFilter
 } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const ApplicationList = () => {
   const { user } = useContext(AuthContext);
@@ -47,15 +48,34 @@ const ApplicationList = () => {
     // Add your edit logic here
   };
 
-  const handleDelete = (application) => {
-    if (window.confirm("Are you sure you want to delete this application?")) {
-      console.log("Delete application:", application);
-      // Add your delete logic here
+  const handleDelete = async (application) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this application?");
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`http://localhost:5000/applications/${application._id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        // Remove deleted application from state
+        const updatedApplications = applications.filter(app => app._id !== application._id);
+        setApplications(updatedApplications);
+        setFilteredApplications(updatedApplications);
+        alert(data.message);
+      } else {
+        alert("Failed to delete application: " + data.message);
+      }
+    } catch (error) {
+      console.error("Error deleting application:", error);
+      alert("An error occurred while deleting application.");
     }
-  };
+  }
 
   const handleView = (application) => {
     console.log("View application:", application);
+
     // Add your view logic here
   };
 
@@ -295,15 +315,19 @@ const ApplicationList = () => {
                       <div className="md:col-span-2">
                         <div className="flex items-center justify-end gap-2">
                           {/* View Button */}
-                          <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => handleView(application)}
-                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 group"
-                            title="View Details"
-                          >
-                            <FiEye className="text-lg group-hover:scale-110 transition-transform duration-200" />
-                          </motion.button>
+                          <Link to={`/apply/${application._id}`}>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => handleView(application)}
+                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 group"
+                            >
+                              <FiEye className="text-lg group-hover:scale-110 transition-transform duration-200" />
+                            </motion.button>
+                          </Link>
+
+                          {/* Edit Button */}
+
 
                           {/* Edit Button */}
                           <motion.button

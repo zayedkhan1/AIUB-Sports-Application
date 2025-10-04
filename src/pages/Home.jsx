@@ -224,6 +224,7 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row gap-4">
 
                 
+                <Link to='/findteam'>
                  <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -231,7 +232,8 @@ const Home = () => {
                 >
                   Find a Team
                 </motion.button>
-                
+                </Link>
+
                <Link to='/postposition'>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -338,12 +340,15 @@ const Home = () => {
                 <h2 className="text-3xl font-bold text-slate-800 mb-2">Featured Positions</h2>
                 <p className="text-slate-600">Latest opportunities waiting for you</p>
               </motion.div>
+            <Link to='/findteam'>
               <motion.button
                 whileHover={{ x: 5 }}
                 className="hidden md:flex items-center text-blue-500 font-medium"
               >
                 View all <FaArrowRight className="ml-2" />
               </motion.button>
+            </Link>
+
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -607,6 +612,7 @@ const Home = () => {
               <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
                 Join thousands of players who have found their perfect match through our platform
               </p>
+            <Link to='/findteam'>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -614,6 +620,7 @@ const Home = () => {
               >
                 Get Started Today
               </motion.button>
+            </Link>
             </motion.div>
           </div>
         </section>

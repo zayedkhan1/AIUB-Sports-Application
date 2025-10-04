@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaFutbol, FaTwitter, FaFacebook, FaInstagram, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaHeart, FaArrowRight } from 'react-icons/fa';
 import footerLogo from '../assets/images/aiubsportslogo.jpg';
 import { footer } from 'motion/react-client';
+import { Link } from 'react-router-dom';
 const PreFooter = () => {
   return (
     <footer className="bg-gradient-to-b from-blue-100 to-purple-100 text-slate-800 pt-16  px-4 relative overflow-hidden">
@@ -21,6 +22,7 @@ const PreFooter = () => {
             transition={{ duration: 0.5 }}
             className="flex flex-col"
           >
+          
             <div className="flex items-center mb-6">
               <div className="h-12 w-12  rounded-xl flex items-center justify-center mr-3 ">
                 {/* <FaFutbol className="text-white text-xl" /> */}
@@ -28,6 +30,7 @@ const PreFooter = () => {
               </div>
               <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">SportConnect</h2>
             </div>
+          
             <p className="text-slate-600 mb-6 leading-relaxed">
               Connecting athletes with opportunities. Find your perfect team or player with our advanced matching platform.
             </p>
