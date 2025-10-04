@@ -13,7 +13,7 @@ const FindTeam = () => {
     useEffect(() => {
       const fetchPositions = async () => {
         try {
-          const res = await fetch("http://localhost:5000/sports"); // replace with your backend URL
+          const res = await fetch(`${import.meta.env.VITE_API_URL}/sports`);
           const data = await res.json();
   
           // Sort by newest first (optional)

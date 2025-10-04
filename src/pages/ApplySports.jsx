@@ -61,7 +61,7 @@ const ApplySports = () => {
 
 
     }
-    axios.post('http://localhost:5000/applications', applicationData)
+    axios.post(`${import.meta.env.VITE_API_URL}/applications`, applicationData)
       .then(response => {
         console.log('Application submitted successfully:', response.data);
         navigate('/myapplications');

@@ -18,7 +18,7 @@ const PostPosition = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("http://localhost:5000/sports", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/sports`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

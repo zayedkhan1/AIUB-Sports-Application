@@ -1,4 +1,4 @@
 export const myapplicationsPromise = (email) => {
-  return fetch(`http://localhost:5000/applications?email=${email}`)
+  return fetch(`${import.meta.env.VITE_API_URL}/applications?email=${email}`)
     .then((res) => res.json());
 };
