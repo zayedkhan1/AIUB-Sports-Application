@@ -1,2 +1,2 @@
-Live website link : aiubteamup.netlify.app
+Live website link : https://aiubteamup.netlify.app/
 # Documentation comming soon
