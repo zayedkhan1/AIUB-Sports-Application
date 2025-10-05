@@ -35,7 +35,7 @@ const PostedMySports = () => {
 
   const handleApplicants = async (application) => {
     try {
-      const res = await fetch(`http://localhost:5000/applications/bySport/${application._id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/applications/bySport/${application._id}`);
       const data = await res.json();
       setSelectedApplicants(data);
     } catch (error) {

@@ -298,7 +298,7 @@ const PostPosition = () => {
                       <option value="LLB">LLB 🔴</option>
                       <option value="English">English🔴</option>
                       <option value="Social Science">Social science 🟢</option>
-                      <option value="Social Science">All</option>
+                      <option value="ALL">All</option>
 
                     </select>
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">

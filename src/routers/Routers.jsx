@@ -31,7 +31,7 @@ const router = createBrowserRouter([
   {
     path: "/apply/:id",
     element: <PrivateRoute><SportsDetails /></PrivateRoute>,
-    loader: ({ params }) => fetch(`http://localhost:5000/sports/${params.id}`)
+    loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/sports/${params.id}`)
   },
   {
     path: '/applysports/:id',
